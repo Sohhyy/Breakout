@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ball : MonoBehaviour
 {
     // Start is called before the first frame update
     private Rigidbody2D rb2d;
-    public float speed = 5f;
-    public GameObject initialPoint;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private GameObject initialPoint;
     private bool islaunched = false;
-    void Start()
+
+    private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+    }
+    void Start()
+    {
+        
+        Assert.IsNotNull(initialPoint);
         //ResetBall();
     }
 
@@ -24,7 +31,7 @@ public class Ball : MonoBehaviour
             gameObject.transform.position = initialPoint.transform.position;
         }
         
-        if (Input.GetKeyDown(KeyCode.Space) && !islaunched)
+        if (Input.GetKeyDown(KeyCode.Space) && !islaunched && !GameManager.Instance.GetGameStatus())
             {
                 islaunched = true;
             rb2d.velocity = Vector2.up * speed;
@@ -45,6 +52,7 @@ public class Ball : MonoBehaviour
     {
         if(collision.gameObject.tag == "LowerWall")
         {
+            GameManager.Instance.DecreaseLife();
             ResetBall();
         }
     }

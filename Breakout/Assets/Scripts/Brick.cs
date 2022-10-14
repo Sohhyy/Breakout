@@ -5,6 +5,8 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    private int score = 1;
     void Start()
     {
         
@@ -21,6 +23,8 @@ public class Brick : MonoBehaviour
         if (collision.gameObject.tag == "Ball")
         {
             Destroy(gameObject);
+            GameManager.Instance.increaseScore(score);
+            BrickManager.Instance.CheckNextLevel();
         }
     }
 }
