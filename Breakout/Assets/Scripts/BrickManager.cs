@@ -24,14 +24,14 @@ public class BrickManager : MonoBehaviour
     [SerializeField]
     private LevelStats[] stats;
     // Start is called before the first frame update
-    
-    
+
+
 
 
 
 
     private List<GameObject> bricks = new List<GameObject>();
-    
+
 
     private int current_level = 0;
     private int total_level;
@@ -60,12 +60,12 @@ public class BrickManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void CreateLevel()
     {
-        for (int i = 0; i <stats[current_level].row; i++)
+        for (int i = 0; i < stats[current_level].row; i++)
         {
             for (int j = 0; j < stats[current_level].column; j++)
             {
@@ -78,7 +78,7 @@ public class BrickManager : MonoBehaviour
 
         }
         brickNum = bricks.Count;
-        List<int> powerupIndex = GetRandomNumberList(0, brickNum-1, Mathf.CeilToInt(brickNum*stats[current_level].PowerUpPossibility)/100);
+        List<int> powerupIndex = GetRandomNumberList(0, brickNum - 1, Mathf.CeilToInt(brickNum * stats[current_level].PowerUpPossibility) / 100);
         //List<int> powerupIndex = GetRandomNumberList(0, 20, );
         foreach (int i in powerupIndex)
         {
@@ -90,17 +90,17 @@ public class BrickManager : MonoBehaviour
 
     public void ClearLevel()
     {
-        foreach(GameObject i in bricks)
+        foreach (GameObject i in bricks)
         {
             Destroy(i);
         }
         bricks.Clear();
-       
+
     }
 
     public int GetCurrentLevel()
     {
-        return current_level +1;
+        return current_level + 1;
     }
 
     public void ResetLevel(int level = 0)
@@ -110,14 +110,14 @@ public class BrickManager : MonoBehaviour
         {
             current_level = level;
         }
-        
+
     }
 
-    
+
 
     public void CheckNextLevel()
     {
-        
+
         brickNum--;
         if (brickNum == 0)
         {
@@ -137,7 +137,7 @@ public class BrickManager : MonoBehaviour
 
     }
 
-    
+
 
     private List<int> GetRandomNumberList(int beginNum, int endNum, int getCount)
     {
@@ -146,7 +146,7 @@ public class BrickManager : MonoBehaviour
             Debug.Log("EndNum < beginNum");
             return null;
         }
-        if (getCount > (endNum - beginNum +1))
+        if (getCount > (endNum - beginNum + 1))
         {
             Debug.Log("wrong size");
             return null;
@@ -161,9 +161,9 @@ public class BrickManager : MonoBehaviour
         int randomIndex = 0, count = randomCount, temp = 0;
         for (int i = 0; i < getCount; i++)
         {
-           
+
             randomIndex = UnityEngine.Random.Range(0, count);
-            resultArray.Add(originalArray[randomIndex]);           
+            resultArray.Add(originalArray[randomIndex]);
             temp = originalArray[randomIndex];
             originalArray[randomIndex] = originalArray[count - 1];
             originalArray[count - 1] = temp;

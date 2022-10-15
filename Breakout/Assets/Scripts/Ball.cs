@@ -18,7 +18,7 @@ public class Ball : MonoBehaviour
     }
     void Start()
     {
-        
+
         Assert.IsNotNull(initialPoint);
         //ResetBall();
     }
@@ -30,19 +30,19 @@ public class Ball : MonoBehaviour
         {
             gameObject.transform.position = initialPoint.transform.position;
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Space) && !islaunched && !GameManager.Instance.GetGameStatus())
-            {
-                islaunched = true;
+        {
+            islaunched = true;
             rb2d.velocity = Vector2.up * speed;
 
-            }
-        
+        }
+
     }
 
     public void ResetBall()
     {
-       
+
         rb2d.velocity = Vector2.zero;
         islaunched = false;
     }
@@ -50,7 +50,7 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "LowerWall")
+        if (collision.gameObject.tag == "LowerWall")
         {
             GameManager.Instance.DecreaseLife();
             ResetBall();

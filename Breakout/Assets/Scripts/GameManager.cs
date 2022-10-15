@@ -34,18 +34,18 @@ public class GameManager : MonoBehaviour
         ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
         Assert.IsNotNull(ball);
 
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void increaseScore(int score)
     {
-        total_score = total_score+score;
+        total_score = total_score + score;
         UIManager.Instance.UpdateScoreUI();
 
     }
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         current_life--;
         UIManager.Instance.UpdateLifeUI();
-        if (current_life == 0)
+        if (current_life <= 0)
         {
             GameOver();
         }
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         return current_life;
     }
 
-   
+
 
     private void ResetScore()
     {
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateLifeUI();
     }
 
-    
+
 
     public void StartGame()
     {

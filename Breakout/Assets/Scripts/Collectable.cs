@@ -19,7 +19,7 @@ public abstract class Collectable : MonoBehaviour
         }
         if (collision.gameObject.tag == "Paddle" && !GameManager.Instance.GetGameStatus())
         {
-            
+
             Destroy(gameObject);
             Effect();
         }

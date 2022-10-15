@@ -8,7 +8,7 @@ public class PowerUp : MonoBehaviour
     public float speed = 5f;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class PowerUp : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if(collision.gameObject.tag == "Paddle" && !GameManager.Instance.GetGameStatus())
+        if (collision.gameObject.tag == "Paddle" && !GameManager.Instance.GetGameStatus())
         {
             Destroy(gameObject);
         }

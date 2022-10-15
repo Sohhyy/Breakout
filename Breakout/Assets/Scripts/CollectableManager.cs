@@ -22,13 +22,13 @@ public class CollectableManager : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ClearCollectable()
@@ -47,7 +47,7 @@ public class CollectableManager : MonoBehaviour
 
     public void CreateCollectable(Vector3 position)
     {
-        GameObject powerup = Instantiate(PowerUpPrefebs[Random.Range(0,PowerUpPrefebs.Length)]);
+        GameObject powerup = Instantiate(PowerUpPrefebs[Random.Range(0, PowerUpPrefebs.Length)]);
         powerup.transform.position = position;
         AddCollectable(powerup);
     }

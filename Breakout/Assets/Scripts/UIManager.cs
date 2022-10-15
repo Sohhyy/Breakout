@@ -31,13 +31,13 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ShowStartUI()
@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateScoreUI()
     {
-        scoreText.text = "Score: "+ GameManager.Instance.getScore();
+        scoreText.text = "Score: " + GameManager.Instance.getScore();
     }
     public void UpdateLifeUI()
     {
