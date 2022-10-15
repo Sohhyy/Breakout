@@ -7,6 +7,9 @@ public class Brick : MonoBehaviour
     // Start is called before the first frame update
 
     private int score = 1;
+    private bool containPowerup = false;
+
+
     void Start()
     {
         
@@ -25,6 +28,15 @@ public class Brick : MonoBehaviour
             Destroy(gameObject);
             GameManager.Instance.increaseScore(score);
             BrickManager.Instance.CheckNextLevel();
+            if (containPowerup)
+            {
+                CollectableManager.Instance.CreateCollectable(transform.position);
+            }
         }
+    }
+
+    public void SetToPowerUp()
+    {
+        containPowerup = true;
     }
 }

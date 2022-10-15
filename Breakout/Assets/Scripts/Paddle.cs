@@ -37,16 +37,4 @@ public class Paddle : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-        if (!GameManager.Instance.GetGameStatus())
-        {
-            //rb2d.velocity = new Vector2(moveHorizontal * speed, 0);
-        }
-        else
-        {
-            //rb2d.velocity = Vector2.zero;
-        }
-        
-    }
 }

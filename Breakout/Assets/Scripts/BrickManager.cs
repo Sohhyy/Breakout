@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class BrickManager : MonoBehaviour
 {
+    [SerializeField] public static BrickManager Instance = null;
     [Serializable]
     public struct LevelStats
     {
@@ -16,17 +17,21 @@ public class BrickManager : MonoBehaviour
         public int column;
         public float verticalOffset;
         public float horizontalOffest;
+        [Range(0, 100)]
+        public int PowerUpPossibility;
     }
+    [SerializeField] private GameObject brickPrefeb;
     [SerializeField]
     private LevelStats[] stats;
     // Start is called before the first frame update
-    [SerializeField] private GameObject brickPrefeb;
-    [SerializeField] private Text levelText;
-    [SerializeField] public static BrickManager Instance = null;
+    
+    
+
 
 
 
     private List<GameObject> bricks = new List<GameObject>();
+    
 
     private int current_level = 0;
     private int total_level;
@@ -73,7 +78,14 @@ public class BrickManager : MonoBehaviour
 
         }
         brickNum = bricks.Count;
-        levelText.text = "Level: " + (current_level+1);
+        List<int> powerupIndex = GetRandomNumberList(0, brickNum-1, Mathf.CeilToInt(brickNum*stats[current_level].PowerUpPossibility)/100);
+        //List<int> powerupIndex = GetRandomNumberList(0, 20, );
+        foreach (int i in powerupIndex)
+        {
+            bricks[i].GetComponent<Brick>().SetToPowerUp();
+        }
+
+        UIManager.Instance.UpdateLevelUI();
     }
 
     public void ClearLevel()
@@ -83,11 +95,12 @@ public class BrickManager : MonoBehaviour
             Destroy(i);
         }
         bricks.Clear();
+       
     }
 
     public int GetCurrentLevel()
     {
-        return current_level;
+        return current_level +1;
     }
 
     public void ResetLevel(int level = 0)
@@ -112,7 +125,8 @@ public class BrickManager : MonoBehaviour
             if (current_level < total_level)
             {
                 ball.ResetBall();
-                bricks.Clear();
+                ClearLevel();
+                CollectableManager.Instance.ClearCollectable();
                 CreateLevel();
             }
             else
@@ -121,6 +135,41 @@ public class BrickManager : MonoBehaviour
             }
         }
 
+    }
+
+    
+
+    private List<int> GetRandomNumberList(int beginNum, int endNum, int getCount)
+    {
+        if (beginNum >= endNum)
+        {
+            Debug.Log("EndNum < beginNum");
+            return null;
+        }
+        if (getCount > (endNum - beginNum +1))
+        {
+            Debug.Log("wrong size");
+            return null;
+        }
+        List<int> resultArray = new List<int>();
+        List<int> originalArray = new List<int>();
+        for (int i = beginNum; i <= endNum; i++)
+        {
+            originalArray.Add(i);
+        }
+        int randomCount = originalArray.Count;
+        int randomIndex = 0, count = randomCount, temp = 0;
+        for (int i = 0; i < getCount; i++)
+        {
+           
+            randomIndex = UnityEngine.Random.Range(0, count);
+            resultArray.Add(originalArray[randomIndex]);           
+            temp = originalArray[randomIndex];
+            originalArray[randomIndex] = originalArray[count - 1];
+            originalArray[count - 1] = temp;
+            count--;
+        }
+        return resultArray;
     }
 
 

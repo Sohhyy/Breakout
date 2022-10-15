@@ -6,19 +6,10 @@ using UnityEngine.Assertions;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [Header("TextUI List")]
-    [SerializeField] private Text scoreText;
-    [SerializeField] private Text lifeText;   
-    
+    // Start is called before the first frame update      
     [Header("Game Configs")]
     [SerializeField] private int max_life = 3;
     [SerializeField] public static GameManager Instance = null;
-
-    [Header("GameStart/Over UI")]
-    [SerializeField] private GameObject GameStartUI;
-    [SerializeField] private GameObject GameOverUI;
-    [SerializeField] private GameObject YouWinUI;
 
     private int total_score = 0;
 
@@ -41,8 +32,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
-        Assert.IsNotNull(scoreText);
-        Assert.IsNotNull(lifeText);
         Assert.IsNotNull(ball);
 
         
@@ -57,14 +46,14 @@ public class GameManager : MonoBehaviour
     public void increaseScore(int score)
     {
         total_score = total_score+score;
-        scoreText.text = "Score: " + total_score;
+        UIManager.Instance.UpdateScoreUI();
 
     }
 
     public void DecreaseLife()
     {
         current_life--;
-        lifeText.text = "Life: " + current_life;
+        UIManager.Instance.UpdateLifeUI();
         if (current_life == 0)
         {
             GameOver();
@@ -90,22 +79,23 @@ public class GameManager : MonoBehaviour
     private void ResetScore()
     {
         total_score = 0;
-        scoreText.text = "Score: " + total_score;
+        UIManager.Instance.UpdateScoreUI();
     }
 
     private void ResetLife()
     {
         current_life = max_life;
-        lifeText.text = "Life: " + current_life;
+        UIManager.Instance.UpdateLifeUI();
     }
 
     
 
     public void StartGame()
     {
-        GameStartUI.SetActive(false);
-        GameOverUI.SetActive(false);
-        YouWinUI.SetActive(false);
+        UIManager.Instance.HideGameOverUI();
+        UIManager.Instance.HideStartUI();
+        UIManager.Instance.HideYouWinUI();
+
         gameOver = false;
         ResetLife();
         ResetScore();
@@ -119,14 +109,14 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         gameOver = true;
-        GameOverUI.SetActive(true);
+        UIManager.Instance.ShowGameOverUI();
     }
 
     public void YouWin()
     {
         ball.ResetBall();
         gameOver = true;
-        YouWinUI.SetActive(true);
+        UIManager.Instance.ShowYouWinUI();
     }
 
     public void QuitGame()
