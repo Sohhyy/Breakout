@@ -112,6 +112,7 @@ public class BrickManager : MonoBehaviour
         if (level < totalLevels)
         {
             currentLevel = level;
+            UIManager.Instance.UpdateLevelUI();
         }
 
     }
