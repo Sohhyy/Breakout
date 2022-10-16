@@ -18,24 +18,18 @@ public class BrickManager : MonoBehaviour
         public float verticalOffset;
         public float horizontalOffest;
         [Range(0, 100)]
-        public int PowerUpPossibility;
+        public int powerUpPossibility;
     }
     [SerializeField] private GameObject brickPrefeb;
     [SerializeField]
     private LevelStats[] stats;
     // Start is called before the first frame update
-
-
-
-
-
-
     private List<GameObject> bricks = new List<GameObject>();
 
 
     private int current_level = 0;
     private int total_level;
-    private Ball ball;
+
     private int brickNum;
 
     private void Awake()
@@ -53,15 +47,10 @@ public class BrickManager : MonoBehaviour
     {
         Assert.IsNotNull(brickPrefeb);
         total_level = stats.Length;
-        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
+
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void CreateLevel()
     {
@@ -78,7 +67,7 @@ public class BrickManager : MonoBehaviour
 
         }
         brickNum = bricks.Count;
-        List<int> powerupIndex = GetRandomNumberList(0, brickNum - 1, Mathf.CeilToInt(brickNum * stats[current_level].PowerUpPossibility) / 100);
+        List<int> powerupIndex = GetRandomNumberList(0, brickNum - 1, Mathf.CeilToInt(brickNum * stats[current_level].powerUpPossibility) / 100);
         //List<int> powerupIndex = GetRandomNumberList(0, 20, );
         foreach (int i in powerupIndex)
         {
@@ -124,9 +113,9 @@ public class BrickManager : MonoBehaviour
             current_level++;
             if (current_level < total_level)
             {
-                ball.ResetBall();
-                ClearLevel();
+                BallManager.Instance.ResetBall();
                 CollectableManager.Instance.ClearCollectable();
+                ClearLevel();
                 CreateLevel();
             }
             else
@@ -136,6 +125,7 @@ public class BrickManager : MonoBehaviour
         }
 
     }
+
 
 
 

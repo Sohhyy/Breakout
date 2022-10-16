@@ -5,7 +5,7 @@ using UnityEngine;
 public class MultiBalls : Collectable
 {
     // Start is called before the first frame update
-
+    [SerializeField] private int nums = 1;
     void Start()
     {
 
@@ -16,6 +16,9 @@ public class MultiBalls : Collectable
 
     protected override void Effect()
     {
-        throw new System.NotImplementedException();
+        for(int i = 0; i < nums; i++)
+        {
+            BallManager.Instance.MultipleBall();
+        }
     }
 }

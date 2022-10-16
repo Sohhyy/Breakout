@@ -4,18 +4,17 @@ using UnityEngine;
 
 public abstract class Collectable : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField]
-    private float speed = 5f;
+    private float fallingSpeed = 5f; // Falling Speed
     private void Update()
     {
-        transform.Translate(Vector2.down * Time.deltaTime * speed);
+        transform.Translate(Vector2.down * Time.deltaTime * fallingSpeed); //Falling Down
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "LowerWall")
         {
-            Destroy(gameObject);
+            Destroy(gameObject); 
         }
         if (collision.gameObject.tag == "Paddle" && !GameManager.Instance.GetGameStatus())
         {

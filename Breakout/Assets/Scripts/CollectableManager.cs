@@ -6,7 +6,7 @@ public class CollectableManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] public static CollectableManager Instance = null;
-    [SerializeField] private GameObject[] PowerUpPrefebs;
+    [SerializeField] private GameObject[] powerUpPrefebs;
     private List<GameObject> collectables = new List<GameObject>();
 
     private void Awake()
@@ -19,16 +19,6 @@ public class CollectableManager : MonoBehaviour
         {
             Instance = this;
         }
-    }
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void ClearCollectable()
@@ -47,7 +37,7 @@ public class CollectableManager : MonoBehaviour
 
     public void CreateCollectable(Vector3 position)
     {
-        GameObject powerup = Instantiate(PowerUpPrefebs[Random.Range(0, PowerUpPrefebs.Length)]);
+        GameObject powerup = Instantiate(powerUpPrefebs[Random.Range(0, powerUpPrefebs.Length)]);
         powerup.transform.position = position;
         AddCollectable(powerup);
     }

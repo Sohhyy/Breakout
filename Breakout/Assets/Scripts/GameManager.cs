@@ -8,13 +8,13 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update      
     [Header("Game Configs")]
-    [SerializeField] private int max_life = 3;
+    [SerializeField] private int maxLife = 3;
     [SerializeField] public static GameManager Instance = null;
 
-    private int total_score = 0;
+    private int currentScore = 0;
 
-    private int current_life = 3;
-    private Ball ball;
+    private int currentLife;
+
 
     private bool gameOver = true;
 
@@ -31,10 +31,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
-        Assert.IsNotNull(ball);
-
-
+        currentLife = maxLife;
     }
 
     // Update is called once per frame
@@ -43,48 +40,51 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void increaseScore(int score)
+    public void IncreaseScore(int score)
     {
-        total_score = total_score + score;
+        currentScore = currentScore + score;
         UIManager.Instance.UpdateScoreUI();
 
     }
 
     public void DecreaseLife()
     {
-        current_life--;
+        currentLife--;
         UIManager.Instance.UpdateLifeUI();
-        if (current_life <= 0)
+        if (currentLife <= 0)
         {
             GameOver();
         }
         else
         {
-            ball.ResetBall();
+            BallManager.Instance.ResetBall();
+            CollectableManager.Instance.ClearCollectable();
         }
     }
 
-    public int getScore()
+
+
+    public int GetScore()
     {
-        return total_score;
+        return currentScore;
     }
 
-    public int getCurrentLife()
+    public int GetCurrentLife()
     {
-        return current_life;
+        return currentLife;
     }
 
 
 
     private void ResetScore()
     {
-        total_score = 0;
+        currentScore = 0;
         UIManager.Instance.UpdateScoreUI();
     }
 
     private void ResetLife()
     {
-        current_life = max_life;
+        currentLife = maxLife;
         UIManager.Instance.UpdateLifeUI();
     }
 
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         BrickManager.Instance.ClearLevel();
         BrickManager.Instance.ResetLevel();
         BrickManager.Instance.CreateLevel();
-        ball.ResetBall();
+        BallManager.Instance.ResetBall();
     }
 
     private void GameOver()
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void YouWin()
     {
-        ball.ResetBall();
+        BallManager.Instance.ResetBall();
         gameOver = true;
         UIManager.Instance.ShowYouWinUI();
     }

@@ -10,9 +10,9 @@ public class UIManager : MonoBehaviour
 
 
     [Header("GameStart/Over UI")]
-    [SerializeField] private GameObject GameStartUI;
-    [SerializeField] private GameObject GameOverUI;
-    [SerializeField] private GameObject YouWinUI;
+    [SerializeField] private GameObject gameStartUI;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject youWinUI;
 
     [Header("TextUI List")]
     [SerializeField] private Text scoreText;
@@ -29,48 +29,41 @@ public class UIManager : MonoBehaviour
             Instance = this;
         }
     }
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public void ShowStartUI()
     {
-        GameStartUI.SetActive(true);
+        gameStartUI.SetActive(true);
     }
     public void HideStartUI()
     {
-        GameStartUI.SetActive(false);
+        gameStartUI.SetActive(false);
     }
     public void ShowGameOverUI()
     {
-        GameOverUI.SetActive(true);
+        gameOverUI.SetActive(true);
     }
     public void HideGameOverUI()
     {
-        GameOverUI.SetActive(false);
+        gameOverUI.SetActive(false);
     }
     public void ShowYouWinUI()
     {
-        YouWinUI.SetActive(true);
+        youWinUI.SetActive(true);
     }
     public void HideYouWinUI()
     {
-        YouWinUI.SetActive(false);
+        youWinUI.SetActive(false);
     }
     public void UpdateScoreUI()
     {
-        scoreText.text = "Score: " + GameManager.Instance.getScore();
+        scoreText.text = "Score: " + GameManager.Instance.GetScore();
     }
     public void UpdateLifeUI()
     {
-        lifeText.text = "Life: " + GameManager.Instance.getCurrentLife();
+        lifeText.text = "Life: " + GameManager.Instance.GetCurrentLife();
     }
     public void UpdateLevelUI()
     {
