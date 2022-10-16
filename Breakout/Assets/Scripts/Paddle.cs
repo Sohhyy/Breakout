@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Paddle class to control the movement of the paddle
+/// </summary>
 public class Paddle : MonoBehaviour
 {
 
@@ -21,14 +24,17 @@ public class Paddle : MonoBehaviour
     void Update()
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
+        //move paddle horizontally when game not over
         if (!GameManager.Instance.GetGameStatus())
         {
             transform.Translate(new Vector2(moveHorizontal * speed * Time.deltaTime, 0));
         }
+        //left boundary check
         if (transform.position.x < leftScreenEdge)
         {
             transform.position = new Vector2(leftScreenEdge, transform.position.y);
         }
+        //right boundary check
         if (transform.position.x > rightScreenEdge)
         {
             transform.position = new Vector2(rightScreenEdge, transform.position.y);

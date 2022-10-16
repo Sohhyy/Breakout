@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// UI Manager which manage all the UI function.
+/// </summary>
 public class UIManager : MonoBehaviour
 {
 

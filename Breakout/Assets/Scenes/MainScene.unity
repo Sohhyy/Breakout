@@ -518,8 +518,8 @@ MonoBehaviour:
     powerUpPossibility: 30
   - row: 7
     column: 4
-    verticalOffset: 2
-    horizontalOffest: 0.5
+    verticalOffset: 0.5
+    horizontalOffest: 2
     powerUpPossibility: 30
 --- !u!1 &313991783
 GameObject:

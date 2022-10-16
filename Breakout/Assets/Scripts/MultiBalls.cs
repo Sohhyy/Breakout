@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// Multiball powerups
+/// All balls currently in the game will by multiply by multiplier
+/// </summary>
 public class MultiBalls : Collectable
 {
     [Header("MultiBall Configs")]
@@ -10,9 +13,8 @@ public class MultiBalls : Collectable
 
     protected override void Effect()
     {
-        for(int i = 0; i < multiplier; i++)
-        {
-            BallManager.Instance.MultipleBall();
-        }
+        //Multiply all the balls by multiplier
+        BallManager.Instance.MultipleBall(multiplier);
+
     }
 }

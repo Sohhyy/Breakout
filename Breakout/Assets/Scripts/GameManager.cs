@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Game Manager which control the game flow, score and life
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     #region  Singleton
@@ -35,7 +38,7 @@ public class GameManager : MonoBehaviour
         currentLife = maxLife;
     }
 
-
+    #region  ScoreFunction
     public void IncreaseScore(int score)
     {
         currentScore = currentScore + score;
@@ -43,34 +46,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void DecreaseLife()
-    {
-        currentLife--;
-        UIManager.Instance.UpdateLifeUI();
-        if (currentLife <= 0)
-        {
-            GameOver();
-        }
-        else
-        {
-            BallManager.Instance.ResetBall();
-            CollectableManager.Instance.ClearCollectable();
-        }
-    }
-
-
-
     public int GetScore()
     {
         return currentScore;
     }
-
-    public int GetCurrentLife()
-    {
-        return currentLife;
-    }
-
-
 
     private void ResetScore()
     {
@@ -78,24 +57,58 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateScoreUI();
     }
 
+    #endregion
+
+
+    #region  LifeFunction
+    public void DecreaseLife(int num = 1)
+    {
+        currentLife -= num;
+        UIManager.Instance.UpdateLifeUI();
+        if (currentLife <= 0)
+        {
+            // if life<=0, then game over
+            GameOver();
+        }
+        else
+        {
+            //otherwise, reset the ball, clear all collectables and continue the game
+            BallManager.Instance.ResetBall();
+            CollectableManager.Instance.ClearCollectable();
+        }
+    }
+    public void IncreaseLife(int num)
+    {
+        currentLife += num;
+    }
+
+    public int GetCurrentLife()
+    {
+        return currentLife;
+    }
+
     private void ResetLife()
     {
         currentLife = maxLife;
         UIManager.Instance.UpdateLifeUI();
     }
+    #endregion
 
 
-
+    #region  GameStatusFunction
     public void StartGame()
     {
+        //Hide all game status UI
         UIManager.Instance.HideGameOverUI();
         UIManager.Instance.HideStartUI();
         UIManager.Instance.HideYouWinUI();
 
+        //Reset score, life and gameover status
         gameOver = false;
         ResetLife();
         ResetScore();
 
+        //Clear and recreate all the bricks and reset ball
         BrickManager.Instance.ClearLevel();
         BrickManager.Instance.ResetLevel();
         BrickManager.Instance.CreateLevel();
@@ -115,13 +128,26 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.ShowYouWinUI();
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
+    /// <summary>
+    /// return if current game is over
+    /// when game over, the user can not move the paddle or launch the ball
+    /// </summary>
+    /// <returns></returns>
     public bool GetGameStatus()
     {
         return gameOver;
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    #endregion
+
+
+
+
+
+
+
 }
