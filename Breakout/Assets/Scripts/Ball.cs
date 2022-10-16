@@ -9,9 +9,8 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb2d;
     [SerializeField] private float speed = 5f;
-    private GameObject paddle;
-    private float y_Offset = 0.35f;
-    private Vector2 offset;
+    private GameObject initialPoint;
+
 
     private void Awake()
     {
@@ -20,8 +19,8 @@ public class Ball : MonoBehaviour
     void Start()
     {
 
-        paddle = GameObject.FindGameObjectWithTag("Paddle");
-        offset = new Vector2(0, y_Offset);
+        initialPoint = BallManager.Instance.GetInitialPoint();
+
 
     }
 
@@ -30,7 +29,7 @@ public class Ball : MonoBehaviour
     {
         if (!BallManager.Instance.GetLaunched())
         {
-            gameObject.transform.position = (Vector2) paddle.transform.position + offset;
+            gameObject.transform.position = initialPoint.transform.position;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !BallManager.Instance.GetLaunched() && !GameManager.Instance.GetGameStatus())

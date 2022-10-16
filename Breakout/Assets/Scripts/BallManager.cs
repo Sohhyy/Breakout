@@ -9,6 +9,7 @@ public class BallManager : MonoBehaviour
     [SerializeField] private GameObject ballPrefeb;
     private int ballNums;
     private bool islaunched = false;
+    [SerializeField] private GameObject initialPoint;
 
     private void Awake()
     {
@@ -39,10 +40,9 @@ public class BallManager : MonoBehaviour
             Destroy(i);
         }
         balls.Clear();
-        SetLaunched(false);
-        GameObject ball = Instantiate(ballPrefeb);
-        balls.Add(ball);
-        ballNums = balls.Count;
+        ballNums = 0;
+        SetLaunched(false);       
+        CreateNewBall(initialPoint.transform.position);
     }
 
     public int GetBallNums()
@@ -92,5 +92,10 @@ public class BallManager : MonoBehaviour
     public void SetLaunched(bool status)
     {
         islaunched = status;
+    }
+
+    public GameObject GetInitialPoint()
+    {
+        return initialPoint;
     }
 }
