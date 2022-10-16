@@ -6,11 +6,12 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ball : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private Rigidbody2D rb2d;
-    [SerializeField] private float speed = 5f;
-    private GameObject initialPoint;
 
+    [Header("Ball Configs")]
+    [SerializeField] private float speed = 5f;
+
+    private GameObject initialPoint;
+    private Rigidbody2D rb2d;
 
     private void Awake()
     {
@@ -18,7 +19,7 @@ public class Ball : MonoBehaviour
     }
     void Start()
     {
-
+        Assert.IsTrue(speed > 0, "Ball speed less than 0");
         initialPoint = BallManager.Instance.GetInitialPoint();
 
 
@@ -40,8 +41,6 @@ public class Ball : MonoBehaviour
         }
 
     }
-
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

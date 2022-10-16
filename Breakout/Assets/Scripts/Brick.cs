@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Brick : MonoBehaviour
 {
+    [Header("Brick Configs")]
+    [SerializeField] private int score = 1;
 
-    private int score = 1;
     private bool containPowerup = false;
-    bool hitted = false;
+    private bool hitted = false;
+
+    private void Start()
+    {
+        Assert.IsTrue(score > 0, "Score is less than 0");
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

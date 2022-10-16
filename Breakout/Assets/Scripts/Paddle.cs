@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-//[RequireComponent(typeof(Rigidbody2D))]
 public class Paddle : MonoBehaviour
 {
     // Start is called before the first frame update
-    [Tooltip("Movement speed of paddle, should be larger than 0")]
+    [Header("Paddle Configs")]
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float leftEdge;
-    [SerializeField] private float rightEdge;
-    //private Rigidbody2D rb2d;
+    [SerializeField] private float leftScreenEdge = -6.7f;
+    [SerializeField] private float rightScreenEdge = 6.7f;
+
     private float moveHorizontal;
     void Start()
     {
-
+        Assert.IsTrue(speed > 0, "Paddle speed is less than 0");
+        Assert.IsTrue(rightScreenEdge > leftScreenEdge, "Wrong Screen Edge Setting");
     }
 
-    // Update is called once per frame
     void Update()
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
@@ -25,14 +25,13 @@ public class Paddle : MonoBehaviour
         {
             transform.Translate(new Vector2(moveHorizontal * speed * Time.deltaTime, 0));
         }
-
-        if (transform.position.x < leftEdge)
+        if (transform.position.x < leftScreenEdge)
         {
-            transform.position = new Vector2(leftEdge, transform.position.y);
+            transform.position = new Vector2(leftScreenEdge, transform.position.y);
         }
-        if (transform.position.x > rightEdge)
+        if (transform.position.x > rightScreenEdge)
         {
-            transform.position = new Vector2(rightEdge, transform.position.y);
+            transform.position = new Vector2(rightScreenEdge, transform.position.y);
         }
 
     }

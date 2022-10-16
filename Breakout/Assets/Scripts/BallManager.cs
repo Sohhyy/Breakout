@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Assertions;
 public class BallManager : MonoBehaviour
 {
-    [SerializeField] public static BallManager Instance = null;
-    private List<GameObject> balls = new List<GameObject>();
-    [SerializeField] private GameObject ballPrefeb;
-    private int ballNums;
-    private bool islaunched = false;
-    [SerializeField] private GameObject initialPoint;
 
+    #region  Singleton
+    public static BallManager Instance = null;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -22,15 +18,22 @@ public class BallManager : MonoBehaviour
             Instance = this;
         }
     }
-    void Start()
-    {
-        
-    }
+    #endregion
 
-    // Update is called once per frame
-    void Update()
+    [Header("Ball Prefeb")]
+    [SerializeField] private GameObject ballPrefeb;
+
+    [Header("Ball Initial Spawn Point")]
+    [SerializeField] private GameObject initialPoint;
+
+    private int ballNums;
+    private bool islaunched = false;
+    private List<GameObject> balls = new List<GameObject>();
+
+    private void Start()
     {
-        
+        Assert.IsNotNull(ballPrefeb, "Missing ball Prefeb");
+        Assert.IsNotNull(initialPoint, "Initial Spawn Point");
     }
 
     public void ResetBall()
@@ -41,7 +44,7 @@ public class BallManager : MonoBehaviour
         }
         balls.Clear();
         ballNums = 0;
-        SetLaunched(false);       
+        SetLaunched(false);
         CreateNewBall(initialPoint.transform.position);
     }
 
@@ -52,7 +55,7 @@ public class BallManager : MonoBehaviour
 
     public void DecreaseBallNum(int num = 1)
     {
-        ballNums=ballNums-num;
+        ballNums -= num;
         if (ballNums <= 0)
         {
             GameManager.Instance.DecreaseLife();
@@ -62,17 +65,17 @@ public class BallManager : MonoBehaviour
     public void MultipleBall()
     {
         List<GameObject> temp = new List<GameObject>(balls);
-        foreach(GameObject ball in temp)
+        foreach (GameObject ball in temp)
         {
             if (ball != null)
             {
-                GameObject newBall = CreateNewBall(ball.transform.position);               
+                GameObject newBall = CreateNewBall(ball.transform.position);
                 newBall.GetComponent<Ball>().SetRandomSpeed();
-                
+
             }
-            
+
         }
-        
+
 
     }
 

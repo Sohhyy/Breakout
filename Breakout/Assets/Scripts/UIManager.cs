@@ -2,22 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Assertions;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] public static UIManager Instance = null;
 
-
-    [Header("GameStart/Over UI")]
-    [SerializeField] private GameObject gameStartUI;
-    [SerializeField] private GameObject gameOverUI;
-    [SerializeField] private GameObject youWinUI;
-
-    [Header("TextUI List")]
-    [SerializeField] private Text scoreText;
-    [SerializeField] private Text lifeText;
-    [SerializeField] private Text levelText;
+    #region  Singleton
+    public static UIManager Instance = null;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,6 +19,27 @@ public class UIManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+    #endregion
+
+    [Header("Game Status UI")]
+    [SerializeField] private GameObject gameStartUI;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject youWinUI;
+
+    [Header("TextUI List")]
+    [SerializeField] private Text scoreText;
+    [SerializeField] private Text lifeText;
+    [SerializeField] private Text levelText;
+
+    private void Start()
+    {
+        Assert.IsNotNull(gameStartUI);
+        Assert.IsNotNull(gameOverUI);
+        Assert.IsNotNull(youWinUI);
+        Assert.IsNotNull(scoreText);
+        Assert.IsNotNull(lifeText);
+        Assert.IsNotNull(levelText);
     }
 
     /// <summary>

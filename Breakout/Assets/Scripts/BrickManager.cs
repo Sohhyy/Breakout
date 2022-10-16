@@ -3,35 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.UI;
-
-
 
 public class BrickManager : MonoBehaviour
 {
-    [SerializeField] public static BrickManager Instance = null;
-    [Serializable]
-    public struct LevelStats
-    {
-        public int row;
-        public int column;
-        public float verticalOffset;
-        public float horizontalOffest;
-        [Range(0, 100)]
-        public int powerUpPossibility;
-    }
-    [SerializeField] private GameObject brickPrefeb;
-    [SerializeField]
-    private LevelStats[] stats;
-    // Start is called before the first frame update
-    private List<GameObject> bricks = new List<GameObject>();
-
-
-    private int current_level = 0;
-    private int total_level;
-
-    private int brickNum;
-
+    #region  Singleton
+    public static BrickManager Instance = null;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -43,22 +19,47 @@ public class BrickManager : MonoBehaviour
             Instance = this;
         }
     }
+    #endregion
+
+    [Serializable]
+    public struct LevelStats
+    {
+        [Range(1, 10)]
+        public int row;
+        [Range(1, 10)]
+        public int column;
+        [Range(0, 10f)]
+        public float verticalOffset;
+        [Range(0, 10f)]
+        public float horizontalOffest;
+        [Range(0, 100)]
+        public int powerUpPossibility;
+    }
+    [SerializeField] private GameObject brickPrefeb;
+    [SerializeField] private LevelStats[] stats;
+
+    private List<GameObject> bricks = new List<GameObject>();
+    private int currentLevel = 0;
+    private int totalLevel;
+    private int brickNum;
+
+
     void Start()
     {
-        Assert.IsNotNull(brickPrefeb);
-        total_level = stats.Length;
-
+        Assert.IsNotNull(brickPrefeb, "Missing brick prefeb");
+        Assert.IsTrue(stats.Length > 0, "Missing level settings");
+        totalLevel = stats.Length;
 
     }
 
 
     public void CreateLevel()
     {
-        for (int i = 0; i < stats[current_level].row; i++)
+        for (int i = 0; i < stats[currentLevel].row; i++)
         {
-            for (int j = 0; j < stats[current_level].column; j++)
+            for (int j = 0; j < stats[currentLevel].column; j++)
             {
-                Vector2 pos = new Vector2(i * stats[current_level].horizontalOffest, -j * stats[current_level].verticalOffset) + (Vector2)this.transform.position;
+                Vector2 pos = new Vector2(i * stats[currentLevel].horizontalOffest, -j * stats[currentLevel].verticalOffset) + (Vector2)this.transform.position;
                 GameObject brick = Instantiate(brickPrefeb);
                 brick.transform.position = pos;
                 brick.transform.SetParent(this.transform);
@@ -67,8 +68,7 @@ public class BrickManager : MonoBehaviour
 
         }
         brickNum = bricks.Count;
-        List<int> powerupIndex = GetRandomNumberList(0, brickNum - 1, Mathf.CeilToInt(brickNum * stats[current_level].powerUpPossibility) / 100);
-        //List<int> powerupIndex = GetRandomNumberList(0, 20, );
+        List<int> powerupIndex = GetRandomNumberList(0, brickNum - 1, Mathf.CeilToInt(brickNum * stats[currentLevel].powerUpPossibility) / 100);
         foreach (int i in powerupIndex)
         {
             bricks[i].GetComponent<Brick>().SetToPowerUp();
@@ -89,20 +89,18 @@ public class BrickManager : MonoBehaviour
 
     public int GetCurrentLevel()
     {
-        return current_level + 1;
+        return currentLevel + 1;
     }
 
     public void ResetLevel(int level = 0)
     {
-        Assert.IsTrue(total_level - level > 0);
-        if (level < total_level)
+        Assert.IsTrue(totalLevel - level > 0);
+        if (level < totalLevel)
         {
-            current_level = level;
+            currentLevel = level;
         }
 
     }
-
-
 
     public void CheckNextLevel()
     {
@@ -110,8 +108,8 @@ public class BrickManager : MonoBehaviour
         brickNum--;
         if (brickNum == 0)
         {
-            current_level++;
-            if (current_level < total_level)
+            currentLevel++;
+            if (currentLevel < totalLevel)
             {
                 BallManager.Instance.ResetBall();
                 CollectableManager.Instance.ClearCollectable();
@@ -126,21 +124,10 @@ public class BrickManager : MonoBehaviour
 
     }
 
-
-
-
     private List<int> GetRandomNumberList(int beginNum, int endNum, int getCount)
     {
-        if (beginNum >= endNum)
-        {
-            Debug.Log("EndNum < beginNum");
-            return null;
-        }
-        if (getCount > (endNum - beginNum + 1))
-        {
-            Debug.Log("wrong size");
-            return null;
-        }
+        Assert.IsTrue(endNum > beginNum);
+        Assert.IsTrue(getCount <= (endNum - beginNum + 1));
         List<int> resultArray = new List<int>();
         List<int> originalArray = new List<int>();
         for (int i = beginNum; i <= endNum; i++)
@@ -161,7 +148,5 @@ public class BrickManager : MonoBehaviour
         }
         return resultArray;
     }
-
-
 
 }

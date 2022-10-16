@@ -1,23 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Assertions;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update      
-    [Header("Game Configs")]
-    [SerializeField] private int maxLife = 3;
-    [SerializeField] public static GameManager Instance = null;
+    #region  Singleton
 
-    private int currentScore = 0;
-
-    private int currentLife;
-
-
-    private bool gameOver = true;
-
+    public static GameManager Instance = null;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -29,16 +19,23 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
+    #endregion
+
+
+    [Header("Game Configs")]
+    [SerializeField] private int maxLife = 3;
+
+    private int currentScore = 0;
+    private int currentLife;
+    private bool gameOver = true;
+
+
     void Start()
     {
+        Assert.IsTrue(maxLife > 0, "Max life less than 0");
         currentLife = maxLife;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void IncreaseScore(int score)
     {

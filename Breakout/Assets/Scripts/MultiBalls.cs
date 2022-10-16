@@ -1,22 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class MultiBalls : Collectable
 {
-    // Start is called before the first frame update
-    [SerializeField] private int nums = 1;
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-
+    [Header("MultiBall Configs")]
+    [SerializeField] [Range(1, 10)] private int multiplier = 1;
 
     protected override void Effect()
     {
-        for(int i = 0; i < nums; i++)
+        for(int i = 0; i < multiplier; i++)
         {
             BallManager.Instance.MultipleBall();
         }

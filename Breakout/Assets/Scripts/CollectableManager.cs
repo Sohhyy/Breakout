@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class CollectableManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] public static CollectableManager Instance = null;
-    [SerializeField] private GameObject[] powerUpPrefebs;
-    private List<GameObject> collectables = new List<GameObject>();
 
+    #region  Singleton
+    public static CollectableManager Instance = null;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -20,7 +18,12 @@ public class CollectableManager : MonoBehaviour
             Instance = this;
         }
     }
-
+    #endregion
+    // Start is called before the first frame update
+    [Header("Power Up Collections")]
+    [SerializeField] private GameObject[] powerUpPrefebs;
+    
+    private List<GameObject> collectables = new List<GameObject>();
     public void ClearCollectable()
     {
         foreach (GameObject i in collectables)
@@ -37,8 +40,12 @@ public class CollectableManager : MonoBehaviour
 
     public void CreateCollectable(Vector3 position)
     {
-        GameObject powerup = Instantiate(powerUpPrefebs[Random.Range(0, powerUpPrefebs.Length)]);
-        powerup.transform.position = position;
-        AddCollectable(powerup);
+        if (powerUpPrefebs.Length > 0)
+        {
+            GameObject powerup = Instantiate(powerUpPrefebs[Random.Range(0, powerUpPrefebs.Length)]);
+            powerup.transform.position = position;
+            AddCollectable(powerup);
+        }
+        
     }
 }
