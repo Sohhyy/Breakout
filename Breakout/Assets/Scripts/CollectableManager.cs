@@ -19,7 +19,6 @@ public class CollectableManager : MonoBehaviour
         }
     }
     #endregion
-    // Start is called before the first frame update
     [Header("Power Up Collections")]
     [SerializeField] private GameObject[] powerUpPrefebs;
     

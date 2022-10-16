@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+
 public class BallManager : MonoBehaviour
 {
 
@@ -75,8 +76,6 @@ public class BallManager : MonoBehaviour
             }
 
         }
-
-
     }
 
     private GameObject CreateNewBall(Vector3 position)

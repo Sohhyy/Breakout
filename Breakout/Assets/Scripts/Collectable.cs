@@ -1,3 +1,8 @@
+/*
+Collectable.cs
+Script for abstract class of all collectable powerups.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

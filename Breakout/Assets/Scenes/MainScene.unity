@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickPrefeb: {fileID: 3466211273749721404, guid: 9d76461dd15c6094783e62bc12f681a4, type: 3}
-  stats:
+  levels:
   - row: 7
     column: 3
     verticalOffset: 0.5
@@ -518,8 +518,8 @@ MonoBehaviour:
     powerUpPossibility: 30
   - row: 7
     column: 4
-    verticalOffset: 0.5
-    horizontalOffest: 2
+    verticalOffset: 2
+    horizontalOffest: 0.5
     powerUpPossibility: 30
 --- !u!1 &313991783
 GameObject:

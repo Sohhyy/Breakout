@@ -42,9 +42,6 @@ public class UIManager : MonoBehaviour
         Assert.IsNotNull(levelText);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public void ShowStartUI()
     {
         gameStartUI.SetActive(true);

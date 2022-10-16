@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-
     [Header("Game Configs")]
     [SerializeField] private int maxLife = 3;
 

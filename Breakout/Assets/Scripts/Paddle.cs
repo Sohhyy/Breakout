@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 public class Paddle : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     [Header("Paddle Configs")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float leftScreenEdge = -6.7f;

@@ -36,7 +36,7 @@ public class BrickManager : MonoBehaviour
         public int powerUpPossibility;
     }
     [SerializeField] private GameObject brickPrefeb;
-    [SerializeField] private LevelStats[] stats;
+    [SerializeField] private LevelStats[] levels;
 
     private List<GameObject> bricks = new List<GameObject>();
     private int currentLevel = 0;
@@ -47,19 +47,19 @@ public class BrickManager : MonoBehaviour
     void Start()
     {
         Assert.IsNotNull(brickPrefeb, "Missing brick prefeb");
-        Assert.IsTrue(stats.Length > 0, "Missing level settings");
-        totalLevel = stats.Length;
+        Assert.IsTrue(levels.Length > 0, "Missing level settings");
+        totalLevel = levels.Length;
 
     }
 
 
     public void CreateLevel()
     {
-        for (int i = 0; i < stats[currentLevel].row; i++)
+        for (int i = 0; i < levels[currentLevel].row; i++)
         {
-            for (int j = 0; j < stats[currentLevel].column; j++)
+            for (int j = 0; j < levels[currentLevel].column; j++)
             {
-                Vector2 pos = new Vector2(i * stats[currentLevel].horizontalOffest, -j * stats[currentLevel].verticalOffset) + (Vector2)this.transform.position;
+                Vector2 pos = new Vector2(i * levels[currentLevel].horizontalOffest, -j * levels[currentLevel].verticalOffset) + (Vector2)this.transform.position;
                 GameObject brick = Instantiate(brickPrefeb);
                 brick.transform.position = pos;
                 brick.transform.SetParent(this.transform);
@@ -68,7 +68,7 @@ public class BrickManager : MonoBehaviour
 
         }
         brickNum = bricks.Count;
-        List<int> powerupIndex = GetRandomNumberList(0, brickNum - 1, Mathf.CeilToInt(brickNum * stats[currentLevel].powerUpPossibility) / 100);
+        List<int> powerupIndex = GetRandomNumberList(0, brickNum - 1, Mathf.CeilToInt(brickNum * levels[currentLevel].powerUpPossibility) / 100);
         foreach (int i in powerupIndex)
         {
             bricks[i].GetComponent<Brick>().SetToPowerUp();
