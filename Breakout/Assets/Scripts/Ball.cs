@@ -13,7 +13,7 @@ public class Ball : MonoBehaviour
     [Header("Ball Configs")]
     [SerializeField] private float speed = 5f;
 
-    private GameObject initialPoint; //Inital Point(child gameobject of the paddle) when the ball is not launched
+    private GameObject initialPoint; //Initial Point(child gameobject of the paddle) when the ball is not launched
     private Rigidbody2D rb2d;
 
     private void Awake()

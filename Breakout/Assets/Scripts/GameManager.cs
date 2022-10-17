@@ -117,22 +117,17 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        gameOver = true;
+        gameOver = true; //set gameover to true to prevent the action of paddle, ball and collectables
         UIManager.Instance.ShowGameOverUI();
     }
 
     public void YouWin()
     {
         BallManager.Instance.ResetBall();
-        gameOver = true;
+        gameOver = true; //set gameover to true to prevent the action of paddle, ball and collectables
         UIManager.Instance.ShowYouWinUI();
     }
 
-    /// <summary>
-    /// return if current game is over
-    /// when game over, the user can not move the paddle or launch the ball
-    /// </summary>
-    /// <returns></returns>
     public bool GetGameOverStatus()
     {
         return gameOver;

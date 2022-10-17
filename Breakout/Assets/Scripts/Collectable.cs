@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 /// <summary>
 /// Abstract Class for all collectable powerups
-/// All collectable falling down in certain speed
+/// All collectables falling down in certain speed
 /// Include a abstract function for the effect of powerup.
 /// </summary>
 public abstract class Collectable : MonoBehaviour

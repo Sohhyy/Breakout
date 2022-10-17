@@ -515,12 +515,12 @@ MonoBehaviour:
     column: 3
     verticalOffset: 0.5
     horizontalOffest: 2
-    powerUpPossibility: 20
+    powerUpPossibility: 15
   - row: 7
     column: 4
     verticalOffset: 0.5
     horizontalOffest: 2
-    powerUpPossibility: 20
+    powerUpPossibility: 15
 --- !u!1 &313991783
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,7 +2175,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Life: 3'
+  m_Text: 'Life: 0'
 --- !u!222 &1091499252
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3317,7 +3317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86d597e3f1993a4db35cb77c86593f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 3
+  maxLife: 5
 --- !u!4 &1968140908
 Transform:
   m_ObjectHideFlags: 0

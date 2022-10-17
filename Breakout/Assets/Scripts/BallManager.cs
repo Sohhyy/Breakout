@@ -28,7 +28,7 @@ public class BallManager : MonoBehaviour
     [SerializeField] private GameObject ballPrefeb;
 
     [Header("Ball Initial Spawn Point")]
-    [SerializeField] private GameObject initialPoint; //Inital Point(child gameobject of the paddle) when the ball is not launched
+    [SerializeField] private GameObject initialPoint; //Initial Point(child gameobject of the paddle) when the ball is not launched
 
     private int ballNums; //the number of balls currenly in the game
     private bool islaunched = false; // if the ball is launched
@@ -106,7 +106,7 @@ public class BallManager : MonoBehaviour
     public void DecreaseBallNum(int num = 1)
     {
         ballNums -= num;
-        //if no ball exists, decrese life
+        //if no ball exists, decrease life
         if (ballNums <= 0)
         {
             GameManager.Instance.DecreaseLife();

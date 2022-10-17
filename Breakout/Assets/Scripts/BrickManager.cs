@@ -75,12 +75,12 @@ public class BrickManager : MonoBehaviour
             }
 
         }
-        brickNum = bricks.Count;  //Reset brickNum
+        brickNum = bricks.Count;  //Set brickNum
         // Get Random number to see which bricks contain powerups
         List<int> powerupIndex = GetRandomNumberList(0, brickNum - 1, Mathf.CeilToInt(brickNum * levels[currentLevel].powerUpPossibility) / 100);
         foreach (int i in powerupIndex)
         {
-            bricks[i].GetComponent<Brick>().SetToPowerUp(); //set corresponding to contain powerups
+            bricks[i].GetComponent<Brick>().SetToPowerUp(); //set corresponding brick to contain powerups
         }
 
 
@@ -125,7 +125,7 @@ public class BrickManager : MonoBehaviour
     /// <summary>
     /// Check if all the bricks are destoryed in current level
     /// if yes, move to next level
-    /// if finish all levels, show Win UI
+    /// if finish all levels, Call youwin function in GameManager
     /// </summary>
     public void CheckNextLevel()
     {
@@ -164,7 +164,7 @@ public class BrickManager : MonoBehaviour
         List<int> originalArray = new List<int>();
         for (int i = beginNum; i <= endNum; i++)
         {
-            originalArray.Add(i); // Set original to contain the number from beginNum to endNum
+            originalArray.Add(i); // Set originalArray to contain the number from beginNum to endNum
         }
         int randomIndex = 0;
         int count = originalArray.Count;
