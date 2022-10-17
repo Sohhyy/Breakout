@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 /// <summary>
-/// Game Manager which control the game flow, score and life
+/// Game Manager which controls the game flow, score and life
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
     /// when game over, the user can not move the paddle or launch the ball
     /// </summary>
     /// <returns></returns>
-    public bool GetGameStatus()
+    public bool GetGameOverStatus()
     {
         return gameOver;
     }

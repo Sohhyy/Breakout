@@ -30,7 +30,7 @@ public abstract class Collectable : MonoBehaviour
             Destroy(gameObject);
         }
         //Destory gameobject and apply corresponding effect of this collectable powerup when hit paddle
-        if (collision.gameObject.tag == "Paddle" && !GameManager.Instance.GetGameStatus())
+        if (collision.gameObject.tag == "Paddle" && !GameManager.Instance.GetGameOverStatus())
         {
             Destroy(gameObject);
             Effect();

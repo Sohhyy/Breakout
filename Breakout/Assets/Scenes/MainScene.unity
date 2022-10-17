@@ -515,12 +515,12 @@ MonoBehaviour:
     column: 3
     verticalOffset: 0.5
     horizontalOffest: 2
-    powerUpPossibility: 30
+    powerUpPossibility: 20
   - row: 7
     column: 4
     verticalOffset: 0.5
     horizontalOffest: 2
-    powerUpPossibility: 30
+    powerUpPossibility: 20
 --- !u!1 &313991783
 GameObject:
   m_ObjectHideFlags: 0

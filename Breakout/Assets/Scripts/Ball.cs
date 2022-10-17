@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 /// <summary>
-/// Ball Class which control the launch, movement and destory of the ball.
+/// Ball Class which control the launch, movement and collision of the ball.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ball : MonoBehaviour
@@ -35,7 +35,7 @@ public class Ball : MonoBehaviour
             gameObject.transform.position = initialPoint.transform.position;
         }
         //if not lunched and not game over, press Space to launch the ball
-        if (Input.GetKeyDown(KeyCode.Space) && !BallManager.Instance.GetLaunched() && !GameManager.Instance.GetGameStatus())
+        if (Input.GetKeyDown(KeyCode.Space) && !BallManager.Instance.GetLaunched() && !GameManager.Instance.GetGameOverStatus())
         {
             BallManager.Instance.SetLaunched(true);
             rb2d.velocity = Vector2.up * speed;

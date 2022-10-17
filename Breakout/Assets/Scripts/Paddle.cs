@@ -14,7 +14,7 @@ public class Paddle : MonoBehaviour
     [SerializeField] private float leftScreenEdge = -6.7f;
     [SerializeField] private float rightScreenEdge = 6.7f;
 
-    private float moveHorizontal;
+    private float moveHorizontal = 0f;
     void Start()
     {
         Assert.IsTrue(speed > 0, "Paddle speed is less than 0");
@@ -25,7 +25,7 @@ public class Paddle : MonoBehaviour
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         //move paddle horizontally when game not over
-        if (!GameManager.Instance.GetGameStatus())
+        if (!GameManager.Instance.GetGameOverStatus())
         {
             transform.Translate(new Vector2(moveHorizontal * speed * Time.deltaTime, 0));
         }

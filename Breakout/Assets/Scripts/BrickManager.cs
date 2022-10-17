@@ -24,7 +24,7 @@ public class BrickManager : MonoBehaviour
     }
     #endregion
 
-    //Struct for the settint of each level
+    //Struct for the setting of each level
     [Serializable]
     public struct LevelStats
     {

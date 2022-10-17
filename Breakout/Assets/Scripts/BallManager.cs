@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 /// <summary>
-/// Ball manager which controls the spawn, reset, clear of the balls
+/// Ball manager which controls the spawn, reset, clear of all the balls in the game
 /// </summary>
 public class BallManager : MonoBehaviour
 {
